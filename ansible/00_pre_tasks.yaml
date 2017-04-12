@@ -6,3 +6,13 @@
 
   - name: "install | k8s components"
     command: sh /opt/pidalio/scripts/install/k8s-component.sh
+
+  - name: "fleetctl | install units"
+    command: "fleetctl start {{ item }}"
+    with_items:
+      - /opt/pidalio/scripts/units/pidalio.service
+      - /opt/pidalio/scripts/units/master/pidalio-apiserver.service
+      - /opt/pidalio/scripts/units/master/pidalio-controller.service
+      - /opt/pidalio/scripts/units/master/pidalio-scheduler.service
+      - /opt/pidalio/scripts/units/pidalio-proxy.service
+      - /opt/pidalio/scripts/units/pidalio-node.service
