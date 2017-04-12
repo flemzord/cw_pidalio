@@ -1,0 +1,18 @@
+---
+  - name: "etcd | start etcd"
+    systemd:
+      daemon_reload: yes
+      enabled: yes
+      state: started
+      name: etcd
+    when: "inventory_hostname == groups.k8s_attach_fip_fr1[0]"
+
+#  - name: "etcd | start proxy"
+#    command: docker run -d --name=etcd-proxy -p 2379:2379 -p 2380:2380 -p 4001:4001 -w / cedbossneo/docker-etcd-rclone proxy.sh 192.168.1.4
+#    command:
+#    when: "inventory_hostname != groups.k8s_attach_fip_fr1[0] and inventory_hostname == groups.k8s_attach_fip_fr1"
+
+  - name: "fleet | start"
+    systemd:
+      state: started
+      name: fleet

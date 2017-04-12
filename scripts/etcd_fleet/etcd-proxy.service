@@ -1,0 +1,14 @@
+[Unit]
+Description=etcd
+Conflicts=etcd2.service
+
+[Service]
+User=etcd
+PermissionsStartOnly=true
+Environment=ETCD_DATA_DIR=/var/lib/etcd
+Environment=ETCD_NAME=%m
+ExecStart=/usr/bin/etcd -proxy on --discovery-fallback 'exit' -listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 -initial-cluster etcd=http://192.168.1.4:2380
+
+Restart=always
+RestartSec=10s
+LimitNOFILE=40000
