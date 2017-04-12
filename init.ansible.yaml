@@ -1,0 +1,9 @@
+---
+- hosts: k8s_attach_fip_fr1:k8s_attach_fip_fr2
+  become: true
+  become_user: root
+  vars:
+    ansible_python_interpreter: "/opt/bin/python"
+
+  tasks:
+    - include: ansible/00_pre_tasks.yaml

@@ -1,0 +1,3 @@
+.idea
+/terraform.tfvars
+/init.ansible.retry

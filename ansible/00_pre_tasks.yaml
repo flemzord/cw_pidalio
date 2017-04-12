@@ -1,0 +1,5 @@
+---
+  - name: "git | clone pidalio"
+    git:
+      repo: https://github.com/flemzord/cw_pidalio.git
+      dest: /opt/pidalio
