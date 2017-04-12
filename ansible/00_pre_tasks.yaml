@@ -3,3 +3,6 @@
     git:
       repo: https://github.com/flemzord/cw_pidalio.git
       dest: /opt/pidalio
+
+  - name: "install | k8s components"
+    command: sh /opt/pidalio/scripts/install/k8s-component.sh
