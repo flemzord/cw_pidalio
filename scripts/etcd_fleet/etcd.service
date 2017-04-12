@@ -1,0 +1,14 @@
+[Unit]
+Description=etcd
+Conflicts=etcd2.service
+
+[Service]
+User=etcd
+PermissionsStartOnly=true
+Environment=ETCD_DATA_DIR=/var/lib/etcd
+Environment=ETCD_NAME=%m
+ExecStart=/usr/bin/etcd -listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 -listen-peer-urls http://0.0.0.0:2380 -initial-cluster-token etcd-cluster -initial-cluster-state new
+
+Restart=always
+RestartSec=10s
+LimitNOFILE=40000
