@@ -1,0 +1,16 @@
+[Unit]
+After=install-weave.service
+After=docker.service
+Description=Weave Network Plugin
+Documentation=http://weave.works/docs
+Requires=docker.service
+Requires=install-weave.service
+[Service]
+TimeoutStartSec=5m
+EnvironmentFile=-/etc/weave.env
+ExecStartPre=/opt/bin/weave launch-plugin
+ExecStart=/usr/bin/docker attach weaveplugin
+Restart=on-failure
+ExecStop=/opt/bin/weave stop-plugin
+[Install]
+WantedBy=weave-network.target

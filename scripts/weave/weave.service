@@ -1,0 +1,16 @@
+[Unit]
+After=install-weave.service
+After=docker.service
+Description=Weave Network Router
+Documentation=http://weave.works/docs
+Requires=docker.service
+Requires=install-weave.service
+[Service]
+TimeoutStartSec=5m
+EnvironmentFile=-/etc/weave.env
+ExecStartPre=/opt/bin/weave launch-router $WEAVE_PEERS
+ExecStart=/usr/bin/docker attach weave
+Restart=on-failure
+ExecStop=/opt/bin/weave stop-router
+[Install]
+WantedBy=weave-network.target

@@ -1,0 +1,8 @@
+[Unit]
+Before=install-weave.service
+Description=Install Weave
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+TimeoutStartSec=5m
+ExecStart=/opt/weave-init.sh

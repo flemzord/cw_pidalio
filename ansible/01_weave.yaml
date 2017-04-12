@@ -1,0 +1,51 @@
+---
+- name: "weave | init"
+  command: cp /opt/pidalio/scripts/weave/weave-init.sh /opt/weave-init.sh
+
+- name: "weave | weave-network.target"
+  command: cp /opt/pidalio/scripts/weave/weave-network.target  /usr/lib64/systemd/system/weave-network.target
+
+- name: "weave | weave-init.service"
+  command: cp /opt/pidalio/scripts/weave/weave-init.service  /usr/lib64/systemd/system/weave-init.service
+
+- name: "weave | 10-weave.network"
+  command: cp /opt/pidalio/scripts/weave/10-weave.network  /usr/lib64/systemd/system/10-weave.network
+
+- name: "weave | install-weave.service"
+  command: cp /opt/pidalio/scripts/weave/install-weave.service  /usr/lib64/systemd/system/install-weave.service
+
+- name: "weave | weave.service"
+  command: cp /opt/pidalio/scripts/weave/weave.service  /usr/lib64/systemd/system/weave.service
+
+- name: "weave | weaveproxy.service"
+  command: cp /opt/pidalio/scripts/weave/weaveproxy.service  /usr/lib64/systemd/system/weaveproxy.service
+
+- name: "weave | weaveplugin.service"
+  command: cp /opt/pidalio/scripts/weave/weaveplugin.service  /usr/lib64/systemd/system/weaveplugin.service
+
+- name: "weave | start {{ item }}"
+  systemd:
+    state: started
+    name: "{{ item }}"
+    witch_items:
+      - weave-network.target
+      - weave-init.service
+      - 10-weave.network
+      - install-weave.service
+      - weave.service
+      - weaveproxy.service
+      - weaveplugin.service
+
+- name: "weave | start {{ item }}"
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    name: "{{ item }}"
+    witch_items:
+      - weave-network.target
+      - weave-init.service
+      - 10-weave.network
+      - install-weave.service
+      - weave.service
+      - weaveproxy.service
+      - weaveplugin.service

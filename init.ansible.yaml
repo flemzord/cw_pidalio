@@ -7,3 +7,4 @@
 
   tasks:
     - include: ansible/00_pre_tasks.yaml
+    - include: ansible/01_weave.yaml
